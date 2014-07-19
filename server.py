@@ -5,34 +5,8 @@ import flask, flask.views
 app = flask.Flask(__name__)
 
 from flask import render_template,request,make_response
-import json,urllib2,xml,sqlite3
-
-class DB:
-    conn = sqlite3.connect('data.db',check_same_thread=False)
-    c = conn.cursor()
-
-    def create_table(self):
-        # create new db and make connection
-        self.c.execute('''CREATE TABLE IF NOT EXISTS users
-                     (name TEXT,email TEXT,phone TEXT,profile TEXT)''')
-        self.conn.commit()
-
-    def add_to_db(self,name,email,phone,profile=''):
-        self.create_table()
-        self.c.execute("INSERT INTO users VALUES (?,?,?,?)",(name,email,phone,profile))
-        self.conn.commit()
-
-    def return_all(self):
-        result_arr = []
-        self.c.execute("SELECT * from users")
-        for row in self.c:
-            result_arr.append(row)
-        return result_arr
-
-    def drop_table(self):
-        self.create_table()
-        self.c.execute("drop table json")
-        self.create_table()
+import json,urllib2,xml
+from dbHelper import DB,test
 
 @app.route('/user_register',methods=['GET','POST'])
 def index():
@@ -54,8 +28,9 @@ def index():
 
 @app.route('/customer_in')
 def customer_in():
-    user_id = request.args.get('user_id')
-    store_id = request.args.get('store_id')
+    email = request.args.get('email')
+    beacon_id = request.args.get('beacon_id')
+
     d = {}
 
     d['type'] = 'mall'
@@ -90,11 +65,6 @@ def customer_out():
 
 def get_user_json(user_id,store_id):
     return ""
-
-def test():
-    D =DB()
-    D.create_table()
-    D.add_to_db("saurav","stomatrix@gmail.com",'9999999999999')
 
 if __name__ == '__main__':
     #test()
