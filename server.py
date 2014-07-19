@@ -34,6 +34,10 @@ class DB:
         self.c.execute("drop table json")
         self.create_table()
 
+@app.route('/foo')
+def foo():
+    return "foo"
+
 @app.route('/user_register')
 def index():
     name = request.form['name']
@@ -45,5 +49,5 @@ def index():
 
 if __name__ == '__main__':
     app.debug = True
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0',port=8080)
 
