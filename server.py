@@ -62,6 +62,20 @@ def customer_in():
     d2['image'] = 'http://www.wakeeffects.com/shop/images/product/d/dilemma-tank-top-r6679-256px-256px.png'
     d['items'].append(d2)
 
+    d['history'] = []
+    d2 = {}
+    d2['name'] = 'Pair of watch'
+    d2['date'] = '12th December'
+    d['history'].append(d2)
+    d2 = {}
+    d2['name'] = 'Shoes'
+    d2['date'] = '1th December'
+    d['history'].append(d2)
+    d2 = {}
+    d2['name'] = 'Gameboy'
+    d2['date'] = '21st December'
+    d['history'].append(d2)
+
     return json.dumps(d)
 
 @app.route('/customer_out')
