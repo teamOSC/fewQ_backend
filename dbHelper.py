@@ -33,14 +33,14 @@ class DB:
         self.conn.commit()
 
     def exec_query(self,query):
-    	result_arr = []
-    	try:
-    		self.c.execute(query)
-    		for row in self.c:
-    	    	result_arr.append(row)
-    		return result_arr
-    	except:
-    		return []
+        result_arr = []
+        try:
+            self.c.execute(query)
+            for row in self.c:
+                result_arr.append(row)
+            return result_arr
+        except:
+            return []
 
 def test():
     D = DB()
@@ -49,5 +49,5 @@ def test():
     D.add_transaction("saurav23123","c1231c2312",'12/34/2014')
 
 if __name__ == '__main__':
-	test()
+    test()
 

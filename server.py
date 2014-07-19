@@ -5,7 +5,7 @@ import flask, flask.views
 app = flask.Flask(__name__)
 
 from flask import render_template,request,make_response
-import json,urllib2,xml
+import json,urllib2,xml,datetime,hashlib,time
 from dbHelper import DB,test
 
 @app.route('/user_register',methods=['GET','POST'])
@@ -22,16 +22,20 @@ def index():
         profile = request.args.get('profile') or ''
 
     D = DB()
-    D.add_to_db(name,email,phone,profile)
+    date_ = datetime.datetime.now().strftime("%d/%m/%Y,%H:%M")
+    D.add_to_db(name,email,phone,date_,profile)
     
     return "200"
 
 @app.route('/customer_in')
 def customer_in():
-    email = request.args.get('email')
+    email = request.args.get('email') or ''
     beacon_id = request.args.get('beacon_id')
 
     d = {}
+
+    if email:
+        d['token'] = hashlib.md5(email + str(int(time.time()))).hexdigest()[:6]
 
     d['type'] = 'mall'
     d['items'] = []
@@ -55,6 +59,7 @@ def customer_in():
     d2['text'] = '10%% discount on tops'
     d2['image'] = 'http://www.wakeeffects.com/shop/images/product/d/dilemma-tank-top-r6679-256px-256px.png'
     d['items'].append(d2)
+
     return json.dumps(d)
 
 @app.route('/customer_out')
