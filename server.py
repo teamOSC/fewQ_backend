@@ -97,6 +97,20 @@ def feedback():
     D.add_feedback(email,beacon_id,rating,comments)
     return "200"
 
+@app.route('/search')
+def search():
+    email = request.args.get('email')
+    D = DB()
+    q = "Select * from users where email like '%s'"%email
+    arr = D.exec_query(q)
+    d = {}
+    d['name'] = arr[0][0]
+    d['email'] = arr[0][1]
+    d['phone'] = arr[0][2]
+    d['profile'] = arr[0][3]
+
+    return json.dumps(d)
+
 if __name__ == '__main__':
     #test()
     app.debug = True

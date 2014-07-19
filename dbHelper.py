@@ -36,6 +36,7 @@ class DB:
 
     def exec_query(self,query):
         result_arr = []
+        self.c.execute(query)
         try:
             self.c.execute(query)
             for row in self.c:
@@ -46,6 +47,7 @@ class DB:
 
 def test():
     D = DB()
+    
     D.add_user("saurav","stomatrix@gmail.com",'9999999999999','123123')
     D.add_manufacturer("1231c2312","Reebok",'Shoes store','{'':''}','12/34/20114')
     D.add_transaction("saurav23123","c1231c2312",'12/34/2014')
