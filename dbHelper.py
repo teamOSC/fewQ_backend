@@ -32,6 +32,13 @@ class DB:
         self.c.execute("INSERT INTO transaction_ VALUES (?,?,?)",(user_id,beacon_id,date))
         self.conn.commit()
 
+    def add_feedback(self,user_id,beacon_id,rating,comments):
+        self.c.execute('''CREATE TABLE IF NOT EXISTS feedback
+                     (user_id TEXT,beacon_id TEXT,rating TEXT,comments TEXT)''')
+        
+        self.c.execute("INSERT INTO feedback VALUES (?,?,?,?)",(user_id,beacon_id,rating,comments))
+        self.conn.commit()
+
     def exec_query(self,query):
         result_arr = []
         try:
@@ -47,7 +54,8 @@ def test():
     D.add_user("saurav","stomatrix@gmail.com",'9999999999999','123123')
     D.add_manufacturer("1231c2312","Reebok",'Shoes store','{'':''}','12/34/20114')
     D.add_transaction("saurav23123","c1231c2312",'12/34/2014')
-
+    D.add_feedback('user_id','beacon_id','5','very nice app')
+    
 if __name__ == '__main__':
     test()
 

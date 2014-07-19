@@ -68,8 +68,15 @@ def customer_out():
     store_id = request.args.get('store_id')
     return ""
 
-def get_user_json(user_id,store_id):
-    return ""
+@app.route('/feedback')
+def feedback():
+    user_id = request.args.get('user_id')
+    beacon_id = request.args.get('beacon_id')
+    rating = request.args.get('rating') or ''
+    comments = request.args.get('comments') or ''
+    D = DB()
+    D.add_feedback(user_id,beacon_id,rating,comments)
+    return "200"
 
 if __name__ == '__main__':
     #test()
