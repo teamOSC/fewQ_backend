@@ -80,7 +80,6 @@ def customer_in():
     d2['text'] = '10%% discount on tops'
     d2['image'] = 'http://www.wakeeffects.com/shop/images/product/d/dilemma-tank-top-r6679-256px-256px.png'
     d['items'].append(d2)
-
     return json.dumps(d)
 
 @app.route('/customer_out')
