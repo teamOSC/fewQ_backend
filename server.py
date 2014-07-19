@@ -31,11 +31,13 @@ def index():
 def customer_in():
     email = request.args.get('email') or ''
     beacon_id = request.args.get('beacon_id')
-
+    D = DB()
+    date_ = datetime.datetime.now().strftime("%d/%m/%Y,%H:%M")
+    D.add_transaction(email,beacon_id,'check_in',date_)
     d = {}
 
     if email:
-        d['token'] = hashlib.md5(email + str(int(time.time()))).hexdigest()[:6]
+        d['token'] = hashlib.md5(email + str(datetime.datetime.now().strftime("%d%m"))).hexdigest()[:6]
 
     d['type'] = 'mall'
     d['items'] = []
@@ -64,18 +66,21 @@ def customer_in():
 
 @app.route('/customer_out')
 def customer_out():
-    user_id = request.args.get('user_id')
-    store_id = request.args.get('store_id')
+    email = request.args.get('email')
+    beacon_id = request.args.get('beacon_id')
+    D = DB()
+    date_ = datetime.datetime.now().strftime("%d/%m/%Y,%H:%M")
+    D.add_transaction(email,beacon_id,'check_out',date_)
     return ""
 
 @app.route('/feedback')
 def feedback():
-    user_id = request.args.get('user_id')
+    email = request.args.get('email')
     beacon_id = request.args.get('beacon_id')
     rating = request.args.get('rating') or ''
     comments = request.args.get('comments') or ''
     D = DB()
-    D.add_feedback(user_id,beacon_id,rating,comments)
+    D.add_feedback(email,beacon_id,rating,comments)
     return "200"
 
 if __name__ == '__main__':

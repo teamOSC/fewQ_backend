@@ -25,11 +25,11 @@ class DB:
         self.c.execute("INSERT INTO manufacturer VALUES (?,?,?,?,?)",(beacon_id,name,details,json,date))
         self.conn.commit()
 
-    def add_transaction(self,user_id,beacon_id,date):
+    def add_transaction(self,user_id,beacon_id,details,date):
         self.c.execute('''CREATE TABLE IF NOT EXISTS transaction_
-                     (user_id TEXT,beacon_id TEXT,date_ TEXT)''')
+                     (user_id TEXT,beacon_id TEXT,details TEXT,date_ TEXT)''')
         
-        self.c.execute("INSERT INTO transaction_ VALUES (?,?,?)",(user_id,beacon_id,date))
+        self.c.execute("INSERT INTO transaction_ VALUES (?,?,?,?)",(user_id,beacon_id,details,date))
         self.conn.commit()
 
     def add_feedback(self,user_id,beacon_id,rating,comments):
@@ -55,7 +55,7 @@ def test():
     D.add_manufacturer("1231c2312","Reebok",'Shoes store','{'':''}','12/34/20114')
     D.add_transaction("saurav23123","c1231c2312",'12/34/2014')
     D.add_feedback('user_id','beacon_id','5','very nice app')
-    
+
 if __name__ == '__main__':
     test()
 
