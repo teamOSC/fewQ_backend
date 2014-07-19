@@ -23,7 +23,7 @@ def index():
 
     D = DB()
     date_ = datetime.datetime.now().strftime("%d/%m/%Y,%H:%M")
-    D.add_to_db(name,email,phone,date_,profile)
+    D.add_user(name,email,phone,date_,profile)
     
     return "200"
 

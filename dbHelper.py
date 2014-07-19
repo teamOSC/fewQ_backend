@@ -5,12 +5,7 @@ import sqlite3
 
 class DB:
     conn = sqlite3.connect('data.db',check_same_thread=False)
-    c = conn.cursor()
-
-    def add_check(self,email,beacon_id):
-        self.c.execute('''CREATE TABLE IF NOT EXISTS checks
-                     (email TEXT,beacon_id TEXT,profile TEXT)''')
-        self.conn.commit()        
+    c = conn.cursor()     
 
     def add_user(self,name,email,phone,date,profile=''):
         self.c.execute('''CREATE TABLE IF NOT EXISTS users
