@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+
+{% block head %}{% endblock %}
+
+{% block form %}
+
+
+	      <form class="form-horizontal" enctype="multipart/form-data" action='/upload' method='POST'>
+
+		      <div class="form-group">
+		        <label for="upload_xml" class="control-label col-xs-2">XML</label>
+		      </div>
+		      <div class="col-xs-offset-2 col-xs-10">
+			      <div class="form-group">
+			        <input type="file" name="upload_xml"/>
+			      </div>
+		      </div> 
+
+		      <div class="form-group">
+		        <div class="col-xs-offset-2 col-xs-10">
+		          <button type="submit" class="btn btn-primary">Submit</button>
+		        </div>
+		      </div>
+	    </form>
+
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

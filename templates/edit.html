@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+
+{% block head %}{% endblock %}
+
+{% block form %}
+
+	<div class="row">
+	  <div class="col-md-12">
+
+	  		      <form class="form-horizontal" enctype="multipart/form-data" action='/download' method='POST'>
+
+		  		      {% for item in arr %}
+		  		    			  <div class="form-group">
+		  		    			      <label for="tag_{{item['name']}}">{{item['name']}}</label>
+		  		    			      <input type="text" class="form-control" name="tag_{{item['name']}}" value='{{item['text']}}'><br>
+		  		    			      <input type="text" class="form-control" name="tag_translated_{{item['name']}}" placeholder="Translated text">
+		  		    			      <input type="hidden" class="form-control" name="xml_text" value="{{xml_text}}">
+		  		    			  </div>
+		  		      {% endfor %}
+
+	  			      <div class="form-group">
+	  			        <button type="submit" class="btn btn-primary">Download translated xml file</button>
+	  			      </div>
+	  		    </form>
+
+	  </div>
+	  <div class="col-md-6">
+	  	
+	  </div>
+
+	</div>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}
