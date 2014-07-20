@@ -91,7 +91,7 @@ def customer_out():
     d['item'] = 'Reebok Shoes'
     d['date'] = '12/4/2014, 12:54'
     token = hashlib.md5(email + str(datetime.datetime.now().strftime("%d%m"))).hexdigest()[:6]
-    payload = { 'token' : token, 'email' : email,'name': name,'phone':''}
+    payload = { 'token' : token, 'email' : email,'name': 'Saurav','phone':'918447789934'}
     r = requests.get("http://tosc.in:8080/transaction", params=payload)
     return json.dumps(d)
     arr = D.exec_query(q)
