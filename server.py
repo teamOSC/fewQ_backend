@@ -5,7 +5,7 @@ import flask, flask.views
 app = flask.Flask(__name__)
 
 from flask import render_template,request,make_response
-import json,urllib2,xml,datetime,hashlib,time
+import json,urllib2,xml,datetime,hashlib,time,requests
 from dbHelper import DB,test
 
 client_pc = 'http://192.168.1.70:5000/'
@@ -81,6 +81,10 @@ def customer_in():
 
 @app.route('/customer_out')
 def customer_out():
+    d = {}
+    d['item'] = 'Reebok Shoes'
+    d['date'] = '12/4/2014, 12:54'
+    return json.dumps(d)
     email = request.args.get('email')
     beacon_id = request.args.get('beacon_id')
     D = DB()
@@ -90,7 +94,10 @@ def customer_out():
     d = {}
     d['item'] = 'Reebok Shoes'
     d['date'] = '12/4/2014, 12:54'
-    token = hashlib.md5(email + str(datetime.datetime.now().strftime("%d%m"))).hexdigest()[:6]
+    if email:
+        token = hashlib.md5(email + str(datetime.datetime.now().strftime("%d%m"))).hexdigest()[:6]
+    else:
+        token = ''
     payload = { 'token' : token, 'email' : email,'name': 'Saurav','phone':'918447789934'}
     r = requests.get("http://tosc.in:8080/transaction", params=payload)
     return json.dumps(d)
