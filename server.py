@@ -12,8 +12,7 @@ client_pc = '192.168.1.10'
 
 @app.route('/user_register',methods=['GET','POST'])
 def index():
-    if request.method == 'GET':
-        
+    if request.method == 'GET':        
         name = request.args.get('name')
         email = request.args.get('email')
         phone = request.args.get('phone')
