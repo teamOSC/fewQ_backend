@@ -8,6 +8,8 @@ from flask import render_template,request,make_response
 import json,urllib2,xml,datetime,hashlib,time
 from dbHelper import DB,test
 
+client_pc = '192.168.1.10'
+
 @app.route('/user_register',methods=['GET','POST'])
 def index():
     if request.method == 'GET':
@@ -39,7 +41,6 @@ def customer_in():
     if email:
         d['token'] = hashlib.md5(email + str(datetime.datetime.now().strftime("%d%m"))).hexdigest()[:6]
 
-    d['type'] = 'mall'
     d['items'] = []
     d2 = {}
     d2['title'] = 'Pantaloons'
@@ -85,7 +86,9 @@ def customer_out():
     D = DB()
     date_ = datetime.datetime.now().strftime("%d/%m/%Y,%H:%M")
     D.add_transaction(email,beacon_id,'check_out',date_)
-    return ""
+    q = "Select * from transaction where email like '%s' and details like 'order_%%'"%email
+    arr = D.exec_query(q)
+    return json.dumps(arr)
 
 @app.route('/feedback')
 def feedback():
@@ -110,6 +113,16 @@ def search():
     d['profile'] = arr[0][3]
 
     return json.dumps(d)
+
+@app.route('/transaction')
+def transaction():
+    email = request.args.get('email')
+    order = request.args.get('order')
+    #token = request.args.get('token')
+    D = DB()
+    date_ = datetime.datetime.now().strftime("%d/%m/%Y,%H:%M")
+    D.add_transaction(email,'','order_'+order,date_)
+    return "200"
 
 if __name__ == '__main__':
     #test()
