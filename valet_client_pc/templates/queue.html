@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+
+{% block head %}{% endblock %}
+
+{% block form %}
+	
+	<!--{{queue_arr}}-->
+		<h3>Customers in Queue</h3>
+		<br>
+		{% for i in queue_arr %}
+			<li>
+				<a href='/queue/{{i[0]}}'>{{i[1]}} [Token No: {{i[0]}}]</a>
+			</li><br>
+		{% endfor %}
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

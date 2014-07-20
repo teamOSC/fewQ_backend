@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+
+{% block head %}{% endblock %}
+
+{% block form %}
+
+		<!--{{item}}-->
+		<h3>#{{item['token']}}</h3>
+
+		<div class="row">
+		 <form class="form-horizontal" enctype="multipart/form-data" action='/upload' method='GET'>
+
+
+		      <div class="form-group">
+		        <label for="inputTitle" class="control-label col-xs-2" >Token</label>
+		        <div class="col-xs-10">
+		          <input type="text" name='token' class="form-control" placeholder="Title" value="{{item['token']}}" readonly>
+		        </div>
+		      </div>
+
+		      <div class="form-group">
+		        <label for="inputTitle" class="control-label col-xs-2" >Name</label>
+		        <div class="col-xs-10">
+		          <input type="text" name='name' class="form-control" placeholder="Title" value="{{item['name']}}" readonly>
+		        </div>
+		      </div>
+
+		      <div class="form-group">
+		        <label for="inputTitle" class="control-label col-xs-2" >Email</label>
+		        <div class="col-xs-10">
+		          <input type="text" name='email' class="form-control" placeholder="Title" value="{{item['email']}}" readonly>
+		        </div>
+		      </div>
+
+		      <div class="form-group">
+		        <label for="inputTitle" class="control-label col-xs-2" >Phone</label>
+		        <div class="col-xs-10">
+		          <input type="text" name='phone' class="form-control" placeholder="Title" value="{{item['phone']}}" readonly>
+		        </div>
+		      </div>
+
+		      <div class="form-group">
+                <label for="inputRating" class="control-label col-xs-2">Order Summary</label>
+                <div class="col-xs-10">
+                 	<textarea name='order' stype='width:400px,height:200px' class="form-control" placeholder="Order Summary"></textarea>
+                </div>
+               </div>
+
+		      <div class="form-group">
+		        <div class="col-xs-offset-2 col-xs-10">
+		          <button type="submit" class="btn btn-primary">Submit</button>
+		        </div>
+		      </div>
+	    </form>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}
