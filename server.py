@@ -87,6 +87,10 @@ def customer_out():
     date_ = datetime.datetime.now().strftime("%d/%m/%Y,%H:%M")
     D.add_transaction(email,beacon_id,'check_out',date_)
     q = "Select * from transaction_ where user_id like '%s' and details like 'order_%%'"%email
+    d = {}
+    d['item'] = 'Reebok Shoes'
+    d['date'] = '12/4/2014, 12:54'
+    return json.dumps(d)
     arr = D.exec_query(q)
     return json.dumps(arr)
 
