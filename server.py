@@ -8,7 +8,7 @@ from flask import render_template,request,make_response
 import json,urllib2,xml,datetime,hashlib,time
 from dbHelper import DB,test
 
-client_pc = '192.168.1.10'
+client_pc = 'http://192.168.1.70:5000/'
 
 @app.route('/user_register',methods=['GET','POST'])
 def index():
@@ -90,6 +90,9 @@ def customer_out():
     d = {}
     d['item'] = 'Reebok Shoes'
     d['date'] = '12/4/2014, 12:54'
+    token = hashlib.md5(email + str(datetime.datetime.now().strftime("%d%m"))).hexdigest()[:6]
+    payload = { 'token' : token, 'email' : email,'name': name,'phone':''}
+    r = requests.get("http://tosc.in:8080/transaction", params=payload)
     return json.dumps(d)
     arr = D.exec_query(q)
     return json.dumps(arr)
@@ -131,5 +134,5 @@ def transaction():
 if __name__ == '__main__':
     #test()
     app.debug = True
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0',port=5001)
 
